@@ -38,4 +38,5 @@ context "Configuring Asset Host" do
     end
   end # using proxy methods
 
+  teardown { Caress::AssetHost.asset_host = nil }
 end # Configuring Asset Host
