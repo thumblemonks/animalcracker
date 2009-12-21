@@ -1,0 +1,6 @@
+test:
+  asset_path: ":memory:"
+development:
+  asset_path: "/assets"
+production:
+  asset_path: "/assets"
