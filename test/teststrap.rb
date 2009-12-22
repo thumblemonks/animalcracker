@@ -1,8 +1,5 @@
-ENV["RACK_ENV"] = "test"
-
-$:.concat(["..", "../lib"])
 require 'rubygems'
-require 'caress'
+require 'animalcracker'
 
 require 'riot'
 require 'chicago/riot'

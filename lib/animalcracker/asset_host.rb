@@ -1,6 +1,6 @@
 require 'pathname'
 
-module Caress
+module AnimalCracker
   class NotFound < Exception; end
   class ReadOnly < Exception; end
 
@@ -49,4 +49,4 @@ module Caress
 
     def store(path_to_asset, contents) self[path_to_asset] = contents; end
   end # MemoryAsset
-end # Caress
+end # AnimalCracker

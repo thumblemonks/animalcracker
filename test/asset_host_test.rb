@@ -1,9 +1,9 @@
 require 'teststrap'
 
 context "Configuring Asset Host" do
-  setup { Caress::AssetHost }
+  setup { AnimalCracker::AssetHost }
 
-  asserts("default asset host") { topic.asset_host }.kind_of(Caress::MemoryAssetHost)
+  asserts("default asset host") { topic.asset_host }.kind_of(AnimalCracker::MemoryAssetHost)
 
   context "when asset_path is :memory:" do
     setup do
@@ -11,17 +11,20 @@ context "Configuring Asset Host" do
       topic.asset_host
     end
 
-    asserts_topic.kind_of(Caress::MemoryAssetHost)
+    asserts_topic.kind_of(AnimalCracker::MemoryAssetHost)
   end # when asset_path is :memory:
 
   context "when asset_path does not match :memory:" do
     setup do
-      topic.configure({"asset_path" => "/tmp"})
+      topic.configure({"asset_path" => "tmp"})
       topic.asset_host
     end
 
-    asserts_topic.kind_of(Caress::FileAssetHost)
-    asserts("root path") { topic.root.to_s }.equals("/tmp")
+    asserts_topic.kind_of(AnimalCracker::FileAssetHost)
+
+    asserts("root path") do
+      topic.root
+    end.equals(Pathname("tmp").realpath)
   end # when asset_path does not match :memory:
 
   context "using proxy methods" do
@@ -38,5 +41,5 @@ context "Configuring Asset Host" do
     end
   end # using proxy methods
 
-  teardown { Caress::AssetHost.asset_host = nil }
+  teardown { AnimalCracker::AssetHost.asset_host = nil }
 end # Configuring Asset Host

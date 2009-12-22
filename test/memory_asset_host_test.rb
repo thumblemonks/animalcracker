@@ -2,12 +2,12 @@ require 'teststrap'
 
 context "Memory Asset Host" do
   setup do
-    Caress::MemoryAssetHost.new({"/bar" => "juice"})
+    AnimalCracker::MemoryAssetHost.new({"/bar" => "juice"})
   end
 
   asserts("nonexistent asset") do
     topic.find("/foo")
-  end.raises(Caress::NotFound, "Could not find /foo")
+  end.raises(AnimalCracker::NotFound, "Could not find /foo")
 
   should("return asset contents if defined") { topic.find("/bar") }.equals("juice")
 
@@ -17,11 +17,11 @@ context "Memory Asset Host" do
   end.equals("bouncer")
 end # Memory Asset Host
 
-context "Memory Asset Host accessed as Caress::AssetHost" do
+context "Memory Asset Host accessed as AnimalCracker::AssetHost" do
   setup do
-    Caress::AssetHost.asset_host = Caress::MemoryAssetHost.new({"/dude" => "lebowski"})
-    Caress::AssetHost
+    AnimalCracker::AssetHost.asset_host = AnimalCracker::MemoryAssetHost.new({"/dude" => "lebowski"})
+    AnimalCracker::AssetHost
   end
 
-  asserts("asset host") { topic.asset_host }.kind_of(Caress::MemoryAssetHost)
-end # Memory Asset Host accessed as Caress::AssetHost
+  asserts("asset host") { topic.asset_host }.kind_of(AnimalCracker::MemoryAssetHost)
+end # Memory Asset Host accessed as AnimalCracker::AssetHost
