@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{animalcracker}
-  s.version = "0.0.1.alpha"
+  s.version = "0.0.1"
 
-  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin 'Gus' Knowlden"]
   s.date = %q{2009-12-21}
-  s.description = %q{A sweet, Sinatra-based extension library for asset hosting. Roarrrrrrrr}
+  s.description = %q{A sweet Sinatra extension for asset hosting. Roarrrrrrrr}
   s.email = %q{gus@gusg.us}
   s.extra_rdoc_files = [
     "README.markdown"
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
      "README.markdown",
      "Rakefile",
      "VERSION",
+     "animalcracker.gemspec",
      "lib/animalcracker.rb",
      "lib/animalcracker/asset_host.rb",
      "test/animalcracker_test.rb",
@@ -32,7 +33,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{A sweet, Sinatra-based extension library for asset hosting}
+  s.summary = %q{A sweet Sinatra extension for asset hosting}
   s.test_files = [
     "test/animalcracker_test.rb",
      "test/asset_host_test.rb",

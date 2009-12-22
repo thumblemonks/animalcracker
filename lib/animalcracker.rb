@@ -7,9 +7,7 @@ module AnimalCracker
     def self.extended(base)
       base.get("*") do
         begin
-          params[:splat].first.split(",").map do |asset_path|
-            AssetHost[asset_path] || not_found
-          end.join
+          params[:splat].first.split(",").map { |asset_path| AssetHost[asset_path] || not_found }
         rescue NotFound
           not_found
         end
@@ -17,7 +15,6 @@ module AnimalCracker
     end
 
   end # Server
-
 end # AnimalCracker
 
 module Sinatra

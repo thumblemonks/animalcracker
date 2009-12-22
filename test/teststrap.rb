@@ -1,6 +1,5 @@
 require 'rubygems'
 
-require 'riot'
 require 'chicago/riot'
 require 'mocha_standalone'
 
