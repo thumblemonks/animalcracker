@@ -5,7 +5,10 @@ context "Memory Asset Host" do
     Caress::MemoryAssetHost.new({"/bar" => "juice"})
   end
 
-  should("return nil if asset not found") { topic.find("/foo") }.nil
+  asserts("nonexistent asset") do
+    topic.find("/foo")
+  end.raises(Caress::NotFound, "Could not find /foo")
+
   should("return asset contents if defined") { topic.find("/bar") }.equals("juice")
 
   should("allow asset to be defined") do

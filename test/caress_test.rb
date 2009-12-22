@@ -1,7 +1,7 @@
 require 'teststrap'
 
 context "Caress App:" do
-  setup { @app = CaressApp }
+  setup { @app = Caress::App }
 
   context "unable to find basic asset" do
     setup { get "/some/asset.ext" }

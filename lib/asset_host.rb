@@ -1,6 +1,7 @@
 require 'pathname'
 
 module Caress
+  class NotFound < Exception; end
   class ReadOnly < Exception; end
 
   # Generic asset hosting proxy. Will default to MemoryAssetHost unless configured otherwise
@@ -23,11 +24,13 @@ module Caress
   class FileAssetHost
     attr_reader :root
     def initialize(root_path)
-      @root = Pathname(root_path)
+      @root = Pathname.new(root_path).realpath
     end
 
     def find(path_to_asset)
       (@root + path_to_asset.gsub(/^\//, '')).read
+    rescue Errno::ENOENT
+      raise(NotFound, "Could not find #{path_to_asset}")
     end
 
     def store(path_to_asset, contents) raise(ReadOnly, "Cannot store files with FileAssetHost"); end
@@ -40,7 +43,10 @@ module Caress
       update(database || {})
     end
 
-    def find(path_to_asset) self[path_to_asset]; end
+    def find(path_to_asset)
+      self[path_to_asset] || raise(NotFound, "Could not find #{path_to_asset}")
+    end
+
     def store(path_to_asset, contents) self[path_to_asset] = contents; end
   end # MemoryAsset
 end # Caress

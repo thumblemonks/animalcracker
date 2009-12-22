@@ -15,6 +15,10 @@ context "A File Asset Host" do
     (@root + "foo/bar").open("w+") { |f| f.write("disco jaws") }
     topic.find("/foo/bar")
   end.equals("disco jaws")
+
+  asserts("nonexistent file") do
+    topic.find("/foo/barge")
+  end.raises(Caress::NotFound, "Could not find /foo/barge")
   
   teardown { @root.rmtree }
 end # A File Asset Host
