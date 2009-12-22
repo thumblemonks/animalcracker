@@ -19,8 +19,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "animalcracker"
-    gem.summary = "A sweet, Sinatra-based extension library for asset hosting"
-    gem.description = "A sweet, Sinatra-based extension library for asset hosting. Roarrrrrrrr"
+    gem.summary = "A sweet Sinatra extension for asset hosting"
+    gem.description = "A sweet Sinatra extension for asset hosting. Roarrrrrrrr"
     gem.email = "gus@gusg.us"
     gem.homepage = "http://github.com/thumblemonks/animalcracker"
     gem.authors = ["Justin 'Gus' Knowlden"]

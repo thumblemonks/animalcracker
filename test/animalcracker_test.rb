@@ -1,7 +1,9 @@
 require 'teststrap'
 
 context "AnimalCracker Server:" do
-  setup { @app = AnimalCracker::Server }
+  setup do
+    mock_app { register AnimalCracker::Server }
+  end
 
   context "unable to find basic asset" do
     setup { get "/some/asset.ext" }

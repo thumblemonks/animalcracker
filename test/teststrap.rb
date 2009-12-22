@@ -1,9 +1,10 @@
 require 'rubygems'
-require 'animalcracker'
 
 require 'riot'
 require 'chicago/riot'
 require 'mocha_standalone'
+
+require 'animalcracker'
 
 class Riot::Situation
   include Mocha::API
