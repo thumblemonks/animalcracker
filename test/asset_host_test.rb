@@ -21,7 +21,7 @@ context "Configuring Asset Host" do
     end
 
     asserts_topic.kind_of(Caress::FileAssetHost)
-    asserts("root path") { topic.root }.equals("/tmp")
+    asserts("root path") { topic.root.to_s }.equals("/tmp")
   end # when asset_path does not match :memory:
 
   context "using proxy methods" do
