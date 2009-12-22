@@ -3,7 +3,6 @@ require 'animalcracker'
 
 require 'riot'
 require 'chicago/riot'
-require 'rack/test'
 require 'mocha_standalone'
 
 class Riot::Situation

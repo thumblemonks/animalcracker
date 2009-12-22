@@ -2,3 +2,4 @@
 *.log
 assets/*
 tmp/*
+pkg/*
