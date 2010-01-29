@@ -34,6 +34,9 @@ context "Default AnimalCracker Server:" do
 
     asserts_response_status 200
     asserts_response_body "Foo"
+    asserts "etag on content" do
+      last_response.headers["ETag"]
+    end.equals('"' + Digest::SHA2.hexdigest("Foo") + '"')
   end # get a basic asset
 
   context "get a grouping of assets" do
