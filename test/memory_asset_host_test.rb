@@ -15,6 +15,12 @@ context "Memory Asset Host" do
     topic.store("/bar/man", "bouncer")
     topic.find("/bar/man")
   end.equals("bouncer")
+
+  asserts("clearing the host's memory first") do
+    topic.store("/bar/man", "bouncer")
+    topic.clear
+    topic.find("/bar/man")
+  end.raises(AnimalCracker::NotFound, "Could not find /bar/man")
 end # Memory Asset Host
 
 context "Memory Asset Host accessed as AnimalCracker::AssetHost" do

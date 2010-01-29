@@ -1,8 +1,24 @@
 require 'teststrap'
 
-context "AnimalCracker Server:" do
+context "AnimalCracker Server without an asset path defined" do
   setup do
-    mock_app { register AnimalCracker::Server }
+    mock_app do
+      register AnimalCracker::Server
+      AnimalCracker::AssetHost["/some/asset.ext"] = "Foo"
+    end
+    get "/some/asset.ext"
+  end
+
+  asserts_response_status 404
+end # AnimalCracker Server without an asset path defined
+
+context "Default AnimalCracker Server:" do
+  setup do
+    AnimalCracker::AssetHost.asset_host.clear
+    mock_app do
+      register AnimalCracker::Server
+      get_assets
+    end
   end
 
   context "unable to find basic asset" do
@@ -31,4 +47,26 @@ context "AnimalCracker Server:" do
     asserts_response_body "function a() {}function b() {}"
   end # get a grouping of assets
 
-end # AnimalCracker Server
+end # Default AnimalCracker Server
+
+context "AnimalCracker Server with custom path" do
+  setup do
+    mock_app do
+      register AnimalCracker::Server
+      get_assets "/assets"
+      AnimalCracker::AssetHost["/some-asset.ext"] = "Foo"
+    end
+  end
+
+  context "unable to find basic asset" do
+    setup { get "/some-asset.ext" }
+    asserts_response_status 404
+  end # unable to find basic asset
+
+  context "asset found with right base path" do
+    setup { get "/assets/some-asset.ext" }
+    asserts_response_status 200
+    asserts_response_body "Foo"
+  end # asset found with right base path
+
+end # AnimalCracker Server with custom path

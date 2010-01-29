@@ -4,10 +4,10 @@ require 'sinatra'
 module AnimalCracker
   module Server
 
-    def self.extended(base)
-      base.get("*") do
+    def get_assets(root_path="")
+      get("#{root_path}/*") do
         begin
-          params[:splat].first.split(",").map { |asset_path| AssetHost[asset_path] || not_found }
+          "/#{params[:splat].first}".split(",").map { |asset_path| AssetHost[asset_path] || not_found }
         rescue NotFound
           not_found
         end
