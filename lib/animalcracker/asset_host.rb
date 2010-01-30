@@ -1,7 +1,6 @@
 require 'pathname'
 
 module AnimalCracker
-  class NotFound < Exception; end
   class ReadOnly < Exception; end
 
   # Generic asset hosting proxy. Will default to MemoryAssetHost unless configured otherwise
@@ -30,7 +29,7 @@ module AnimalCracker
     def find(path_to_asset)
       (@root + path_to_asset.gsub(/^\//, '')).read
     rescue Errno::ENOENT
-      raise(NotFound, "Could not find #{path_to_asset}")
+      nil
     end
 
     def store(path_to_asset, contents) raise(ReadOnly, "Cannot store files with FileAssetHost"); end
@@ -44,7 +43,7 @@ module AnimalCracker
     end
 
     def find(path_to_asset)
-      self[path_to_asset] || raise(NotFound, "Could not find #{path_to_asset}")
+      self[path_to_asset] || nil
     end
 
     def store(path_to_asset, contents) self[path_to_asset] = contents; end

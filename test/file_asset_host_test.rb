@@ -18,7 +18,7 @@ context "A File Asset Host" do
 
   asserts("nonexistent file") do
     topic.find("/foo/barge")
-  end.raises(AnimalCracker::NotFound, "Could not find /foo/barge")
+  end.nil
   
   teardown { @root.rmtree }
 end # A File Asset Host

@@ -36,7 +36,7 @@ context "Default AnimalCracker Server:" do
     asserts_response_body "Foo"
     asserts "etag on content" do
       last_response.headers["ETag"]
-    end.equals('"' + Digest::SHA2.hexdigest("Foo") + '"')
+    end.equals('"' + Digest::MD5.hexdigest("Foo") + '"')
   end # get a basic asset
 
   context "get a grouping of assets" do
@@ -73,3 +73,19 @@ context "AnimalCracker Server with custom path" do
   end # asset found with right base path
 
 end # AnimalCracker Server with custom path
+
+context "A compound request with relative paths" do
+  setup do
+    AnimalCracker::AssetHost.asset_host.clear
+    mock_app do
+      register AnimalCracker::Server
+      get_assets
+      AnimalCracker::AssetHost["/foo/bar.ext"] = "Bar"
+      AnimalCracker::AssetHost["/foo/baz.ext"] = "Baz"
+    end
+    get "/foo/bar.ext,baz.ext"
+  end
+
+  asserts_response_status 200
+  asserts_response_body "BarBaz"
+end # A compound request with relative paths

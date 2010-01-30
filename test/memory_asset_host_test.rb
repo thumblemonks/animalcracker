@@ -7,7 +7,7 @@ context "Memory Asset Host" do
 
   asserts("nonexistent asset") do
     topic.find("/foo")
-  end.raises(AnimalCracker::NotFound, "Could not find /foo")
+  end.nil
 
   should("return asset contents if defined") { topic.find("/bar") }.equals("juice")
 
@@ -20,7 +20,7 @@ context "Memory Asset Host" do
     topic.store("/bar/man", "bouncer")
     topic.clear
     topic.find("/bar/man")
-  end.raises(AnimalCracker::NotFound, "Could not find /bar/man")
+  end.nil
 end # Memory Asset Host
 
 context "Memory Asset Host accessed as AnimalCracker::AssetHost" do
