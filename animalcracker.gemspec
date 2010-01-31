@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin 'Gus' Knowlden"]
-  s.date = %q{2010-01-29}
+  s.date = %q{2010-01-30}
   s.description = %q{A sweet Sinatra extension for asset hosting. Roarrrrrrrr}
   s.email = %q{gus@gusg.us}
   s.extra_rdoc_files = [
@@ -23,11 +23,15 @@ Gem::Specification.new do |s|
      "animalcracker.gemspec",
      "lib/animalcracker.rb",
      "lib/animalcracker/asset_host.rb",
+     "lib/smurf.rb",
+     "lib/smurf/javascript.rb",
+     "test/animalcracker_javascript_test.rb",
      "test/animalcracker_test.rb",
      "test/asset_host_test.rb",
      "test/file_asset_host_test.rb",
      "test/memory_asset_host_test.rb",
      "test/performance/md5-vs-sha2.rb",
+     "test/smurf_javascript_test.rb",
      "test/teststrap.rb"
   ]
   s.homepage = %q{http://github.com/thumblemonks/animalcracker}
@@ -36,11 +40,13 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A sweet Sinatra extension for asset hosting}
   s.test_files = [
-    "test/animalcracker_test.rb",
+    "test/animalcracker_javascript_test.rb",
+     "test/animalcracker_test.rb",
      "test/asset_host_test.rb",
      "test/file_asset_host_test.rb",
      "test/memory_asset_host_test.rb",
      "test/performance/md5-vs-sha2.rb",
+     "test/smurf_javascript_test.rb",
      "test/teststrap.rb"
   ]
 

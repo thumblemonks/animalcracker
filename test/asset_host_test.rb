@@ -28,15 +28,14 @@ context "Configuring Asset Host" do
   end # when asset_path does not match :memory:
 
   context "using proxy methods" do
-    mocha_support
 
     should "call proxy [] to find on actual asset host" do
-      topic.asset_host.expects(:find).with("/baz").returns("happy ending")
+      mock(topic.asset_host).find("/baz") { "happy ending" }
       topic["/baz"]
     end.equals("happy ending")
 
     should "call proxy []= to store on actual asset host" do
-      topic.asset_host.expects(:store).with("/bax", "jaw")
+      mock(topic.asset_host).store("/bax", "jaw")
       topic["/bax"] = "jaw"
     end
   end # using proxy methods

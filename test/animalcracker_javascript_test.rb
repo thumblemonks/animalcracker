@@ -2,17 +2,19 @@ require 'teststrap'
 
 context "A compound request with javascript specific resources" do
   setup do
+    mock(Smurf::Javascript).minify("bar;baz") { "HELLO WORLD" }
     AnimalCracker::AssetHost.asset_host.clear
+    AnimalCracker::AssetHost["/foo/bar.js"] = "bar;"
+    AnimalCracker::AssetHost["/foo/baz.js"] = "baz"
+
     mock_app do
       register AnimalCracker::Server
       get_assets
-      # TODO: Use rr here instead
-      AnimalCracker::AssetHost["/foo/bar.js"] = "var a='bar';\nvar b='bar';\n"
-      AnimalCracker::AssetHost["/foo/baz.js"] = "/*\n * blah\n */\nfunction f(a, b)\n{\n return (a);\n  }\n"
     end
+
     get "/foo/bar.js,baz.js"
   end
 
   asserts_response_status 200
-  asserts_response_body "var a='bar';var b='bar';function f(a,b)\n{return(a);}"
+  asserts_response_body "HELLO WORLD"
 end # A compound request with javascript specific resources
